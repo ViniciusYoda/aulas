@@ -1,32 +1,32 @@
-import React, { createContext, useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
+
 
 interface IUsuarioLogadoContextData {
-    nomeDoUsuario: string,
-    logout: () => void;
+  nomeDoUsuario: string;
+  logout: () => void;
 }
 
-export const UsuarioLogaoContext = createContext<IUsuarioLogadoContextData>({} as IUsuarioLogadoContextData);
+export const UsuarioLogadoContext = createContext<IUsuarioLogadoContextData>({} as IUsuarioLogadoContextData);
 
 interface IUsuarioLogadoProviderProps {
-    children: React.ReactNode
+  children: React.ReactNode
 }
-
 export const UsuarioLogadoProvider: React.FC<IUsuarioLogadoProviderProps> = ({ children }) => {
-    const [nome, setNome] = useState('');
+  const [nome, setNome] = useState('');
 
-    useEffect(() => {
-        setTimeout(() => {
-            setNome('Vini');
-        }, 1000);
-    });
+  useEffect(() => {
+    setTimeout(() => {
+      setNome('Lucas');
+    }, 1000);
+  });
 
-    const handleLogout = useCallback(() => {
-        console.log('Logout')
-    }, []);
+  const handleLogout = useCallback(() => {
+    console.log('Logout executou');
+  }, []);
 
-    return (
-        <UsuarioLogaoContext.Provider value={{ nomeDoUsuario: nome, logout: handleLogout}}>
-            {children}
-        </UsuarioLogaoContext.Provider>
-    )
+  return (
+    <UsuarioLogadoContext.Provider value={{ nomeDoUsuario: nome, logout: handleLogout }}>
+      {children}
+    </UsuarioLogadoContext.Provider>
+  );
 }
